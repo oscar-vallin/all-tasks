@@ -17,8 +17,9 @@ const port = process.env.PORT || 4000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 //routes
-require('./routes/route')(app);
 app.use('/api/users', require('./routes/usersRoute'));
+app.use('/api/auth', require('./routes/authRoute'));
+app.use('/api/task', require('./routes/taskRoute'));
 
 app.listen(port, () => {
     console.log(`Server up on port ${port}`)
