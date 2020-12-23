@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {secretWord} = require('../config/dev');
+const key = require('../config/keys');
 
 module.exports = (req,res,next) => {
 
@@ -8,7 +8,7 @@ module.exports = (req,res,next) => {
     
     if(!token) return res.status(401).json({msg: "There is no token"});
 
-    const encrypt = jwt.verify(token, secretWord);
+    const encrypt = jwt.verify(token, key.secretWord);
 
     req.user = encrypt.user;
     next();
