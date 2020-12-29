@@ -43,7 +43,7 @@ exports.createUser = async (req,res) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(400).json({msg: 'There is an error'});
+        return res.status(400).json({msg: 'There was an error'});
     }
     
    
