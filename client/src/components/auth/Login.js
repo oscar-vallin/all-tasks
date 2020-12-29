@@ -13,12 +13,15 @@ const Auth = ({history}) => {
     
 
     useEffect(() => {
+
         if(auth.authenticated){
             history.push('/tasks');
-        }
+        };
+
     },[auth.authenticated, history]);
 
-    const [dataUser, getDataUser] = useState({email: '',password: ''})
+    const [dataUser, getDataUser] = useState({email: '',password: ''});
+    const [error, getError] = useState(false);
 
 
     const {email, password} = dataUser;
@@ -29,8 +32,10 @@ const Auth = ({history}) => {
         e.preventDefault();
         
         if(email.trim() === '' || password.trim() === ''){
-            return alert("All files are required");
+
+            return getError({error: true})   
         }
+       
         dispatch(userLoginAction(dataUser));
     }
     
@@ -38,6 +43,7 @@ const Auth = ({history}) => {
     return(
         <div className="form-user">
             <div className="container-form">
+                {error ? <p className="alert-error">{auth.message}</p> : null}
                 <h1>Log In</h1>
                 <form onSubmit={onSubmit}>
                     <div className="camp-form">

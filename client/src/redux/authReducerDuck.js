@@ -48,7 +48,7 @@ export const createUserAction = data => async dispatch => {
     
         authenticatedUserActions()(dispatch);
     } catch (error) {
-        console.log(error.response.data)
+        console.log("perro")
         dispatch({
             type: USER_ERROR,
             payload: error.response.data.msg
