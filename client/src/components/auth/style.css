@@ -1,0 +1,92 @@
+.form-user{
+    height: 90vh;
+    min-height: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-form{
+    padding: 5rem 3rem;
+    max-width: 450px;
+    width: 95%;
+    background-color: white;
+    border-radius: 1rem;
+}
+
+.container-form h1{
+    text-align: center;
+}
+
+.camp-form{
+    display: flex;
+    margin-bottom: 2rem;
+    align-items: center;
+}
+
+.camp-form:last-of-type{
+    margin: 0;
+}
+
+.camp-form label{
+    flex: 0 0 100px;
+    
+}
+
+.camp-form input[type="text"],
+.camp-form input[type="email"],
+.camp-form input[type="password"]{
+    border: 1px solid #e1e1e1;
+    padding: 1rem;
+    flex: 1;
+}
+
+.camp-form input[type="submit"]{
+    margin-top: 15px;
+    padding: 10px 2rem;
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover{
+    background-color: #2f3848;
+}
+
+.alert{
+    position: fixed;
+    top: 0;
+    padding: 1rem 3rem;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+@media (min-width:768px) {
+    .alert {
+        width: auto;
+        top: 30px;
+        right: 10px;
+        left: auto;
+    }
+  }
+
+.alert-error{
+    background-color: rgb(230, 78, 78);
+    color: var(--white);
+  }
+
+  .account-link {
+    margin-top: 2rem;
+    display: block;
+    font-weight: 600;
+    font-size: 1.5rem;
+    opacity: .7;
+    text-decoration: none;
+  }
+
+  .account-link:hover{
+      font-size: 1.7rem;
+      color: black;
+  }

@@ -8,20 +8,21 @@ const {validationResult} = require('express-validator');
 exports.createUser = async (req,res) => {
     const {password, email} = req.body;
     //check user validate
+  
     const err = validationResult(req);
     
     if(!err.isEmpty()) return res.status(400).json({err: err.array()});
 
     try {
-       
+     
         let user;
 
         user = await User.findOne({email});
-    
-        if(user) return res.status(400).json({res: "This user is already exist"});
+        
+        if(user) return res.status(400).json({msg: "This user is already exist"});
         
         user = await User(req.body);
-    
+        
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
     

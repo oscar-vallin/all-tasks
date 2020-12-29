@@ -1,0 +1,18 @@
+.app-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2f3848;
+    padding: 2rem 2.5rem;
+}
+
+.user-name{
+    color: white;
+    font-size: 2.2rem;
+    margin: 5px;
+}
+
+.btn-blank{
+    margin: 0;
+}
+
