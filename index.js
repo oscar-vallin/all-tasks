@@ -32,11 +32,6 @@ if(process.env.NODE_ENV === 'production'){
     const path = require('path');
     app.get('*', (req,res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-// pro-mongodb+srv://oscar:vallin1993@cluster0.oq2m7.mongodb.net/<dbname>?retryWrites=true&w=majority
-
-// dev-mongodb+srv://oscar:vallin1993@cluster0.guuay.mongodb.net/<dbname>?retryWrites=true&w=majority
-
-//
     });
 };
     
