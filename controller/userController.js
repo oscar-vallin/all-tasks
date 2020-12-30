@@ -13,9 +13,7 @@ exports.createUser = async (req,res) => {
     const err = validationResult(req);
     
     if(!err.isEmpty()) return res.status(400).json({err: err.array()});
-    res.json(req.body)
   
-    return res.json({msg: `Hello `});
         let user;
 
         user = await User.findOne({email});
@@ -27,7 +25,7 @@ exports.createUser = async (req,res) => {
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
     
-       
+        return res.json({msg: `Hello wordl ${req.body}`});
         await user.save();
 
         // const payload = {
