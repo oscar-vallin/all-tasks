@@ -29,7 +29,7 @@ exports.createUser = async (req,res) => {
     
         await user.save((error, document) => {
             if(error) {
-                res.json({msg; error})
+                res.json({msg: error})
             }
 
             return res.json({document});
