@@ -27,8 +27,8 @@ exports.createUser = async (req,res) => {
         const salt = await bcrypt.genSalt(8);
         user.password = await bcrypt.hash(password, salt);
     
-        user.save();
-        return res.json(user);
+        await user.save();
+       
 
         const payload = {
             user : {
@@ -41,7 +41,7 @@ exports.createUser = async (req,res) => {
             if(error) throw error;
 
             //confirm
-            res.json({token})
+            res.json(token)
         });
     } catch (error) {
         console.log(error);
