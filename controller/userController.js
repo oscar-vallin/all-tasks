@@ -14,38 +14,39 @@ exports.createUser = async (req,res) => {
     
     if(!err.isEmpty()) return res.status(400).json({err: err.array()});
   
+    try{
+        return res.json({msg: `Name is ${req.body}`})
         let user;
-        return res.json(password);
+        // return res.json(password);
         user = await User.findOne({email});
         
         if(user) return res.status(400).json({msg: "This user is already exist"});
         
         user = await User(req.body);
-     
+        console.log(user)
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
     
         
         await user.save();
 
-        // const payload = {
-        //     user : {
-        //         id: user.id
-        //     }
-        // };
-        // jwt.sign(payload, key.secretWord, {
-        //     expiresIn: 3600
-        // }, (error, token) => {
-        //     if(error) throw error;
+        const payload = {
+            user : {
+                id: user.id
+            }
+        };
+        jwt.sign(payload, key.secretWord, {
+            expiresIn: 3600
+        }, (error, token) => {
+            if(error) throw error;
 
-        //     //confirm
-        //     res.json({token})
-        //     console.log(req.body)
-        // });
-    // } catch (error) {
-    //     console.log(error);
-    //     return res.status(400).json({msg: `there was an error ${req.body}`});
-    // }
+            //confirm
+            res.json({token})
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({msg: `there was an error ${req.body}`});
+    }
     
    
 }
