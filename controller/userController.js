@@ -15,15 +15,15 @@ exports.createUser = async (req,res) => {
     if(!err.isEmpty()) return res.status(400).json({err: err.array()});
   
     try{
-        return res.json(req.body);
+    
         let user;
         // return res.json(password);
-        user = await User.findOne({email});
+        // user = await User.findOne({email});
         
-        if(user) return res.status(400).json({msg: "This user is already exist"});
+        // if(user) return res.status(400).json({msg: "This user is already exist"});
         
         user = await User(req.body);
-        console.log(user)
+         return res.json(user);
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
     

@@ -33,7 +33,11 @@ app.use('/api/task', require('./routes/taskRoute'));
 //     app.get('*', (req,res) => {
 //         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
 // "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-// mongodb+srv://oscar:vallin1993@cluster0.oq2m7.mongodb.net/<dbname>?retryWrites=true&w=majority
+// develovemtn-mongodb+srv://oscar:vallin1993@cluster0.oq2m7.mongodb.net/<dbname>?retryWrites=true&w=majority
+
+// production-mongodb+srv://oscar:vallin1993@cluster0.guuay.mongodb.net/<dbname>?retryWrites=true&w=majority
+
+//
 //     });
 // };
     
