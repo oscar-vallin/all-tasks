@@ -4,7 +4,7 @@ import AuthUser from './components/auth/Login';
 import CreateUser from './components/auth/CreateUser';
 import Project from './components/project/Project';
 
-import PrivateRoute from './components/routes/PrivateRoute';
+// import PrivateRoute from './components/routes/PrivateRoute';
 
 
 
@@ -14,7 +14,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={AuthUser} />
         <Route exact path="/create-user" component={CreateUser} />
-        <PrivateRoute exact path="/tasks" component={Project} />        
+        <Route exact path="/tasks" component={Project} />        
       </Switch>
     </Router>
 
