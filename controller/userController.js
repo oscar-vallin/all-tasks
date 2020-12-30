@@ -17,11 +17,11 @@ exports.createUser = async (req,res) => {
         let user;
 
         user = await User.findOne({email});
-        
+        return res.json({msg: `Hello wordl `});
         if(user) return res.status(400).json({msg: "This user is already exist"});
         
         user = await User(req.body);
-        return res.json({msg: `Hello wordl ${user}`});
+        
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
     
