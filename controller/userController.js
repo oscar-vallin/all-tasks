@@ -35,7 +35,6 @@ exports.createUser = async (req,res) => {
             return res.json({document});
         });
        
-        return res.json(req.body);
         const payload = {
             user : {
                 id: user.id
