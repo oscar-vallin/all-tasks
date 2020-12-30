@@ -6,7 +6,7 @@ const key = require('../config/keys');
 const {validationResult} = require('express-validator');
 
 exports.createUser = async (req,res) => {
-    return res.json({msg: `Hello `});
+   
     const {password, email} = req.body;
     //check user validate
     
@@ -15,7 +15,7 @@ exports.createUser = async (req,res) => {
     if(!err.isEmpty()) return res.status(400).json({err: err.array()});
     res.json(req.body)
   
-     
+    return res.json({msg: `Hello `});
         let user;
 
         user = await User.findOne({email});
