@@ -46,7 +46,7 @@ exports.createUser = async (req,res) => {
             if(error) throw error;
 
             //confirm
-            res.json(token)
+            res.json({token})
         });
     } catch (error) {
         console.log(error);
