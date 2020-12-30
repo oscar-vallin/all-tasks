@@ -7,31 +7,36 @@ const key = require('../config/keys');
 exports.authenticateUser = async (req,res) => {
     const {email,password} = req.body;
 
-    let user;
+    try{
+        let user;
+    
+        user = await User.findOne({email});
+    
+        if(!user) return res.status(400).json({msg: 'The user is not exist'});
+    
+        const correctPassword = await bcrypt.compare(password, user.password);
+    
+      
+        if(!correctPassword) return res.status(400).json({msg: 'This password is incorrect'});
+      
+    
+        const payload = {
+            user : {
+                id: user.id
+            }
+        };
+        jwt.sign(payload,key.secretWord, {
+            expiresIn: 3600
+        },(error, token) => {
+    
+            if(error) throw error;
+    
+            res.json({token});
+        })
 
-    user = await User.findOne({email});
-
-    if(!user) return res.status(400).json({msg: 'The user is not exist'});
-
-    const correctPassword = await bcrypt.compare(password, user.password);
-
-    console.log(correctPassword);
-    if(!correctPassword) return res.status(400).json({msg: 'This password is incorrect'});
-  
-
-    const payload = {
-        user : {
-            id: user.id
-        }
-    };
-    jwt.sign(payload,key.secretWord, {
-        expiresIn: 3600
-    },(error, token) => {
-
-        if(error) throw error;
-
-        res.json({token});
-    })
+    }catch(error){
+        return res.status(400).json({msg: `there was an error ${req.body}` })
+    }
 
 }
 
