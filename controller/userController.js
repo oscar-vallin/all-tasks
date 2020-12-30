@@ -6,6 +6,7 @@ const key = require('../config/keys');
 const {validationResult} = require('express-validator');
 
 exports.createUser = async (req,res) => {
+    res.json(req.body)
     const {password, email} = req.body;
     //check user validate
   
