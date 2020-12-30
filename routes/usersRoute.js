@@ -4,6 +4,14 @@ const {check} = require('express-validator');
 
 const {createUser} = require('../controller/userController');
 
+route.get('/', (req,res) => {
+    const person = {
+        name : "oscar",
+        age: 27
+    };
+
+    res.json(person);
+})
 route.post('/',
     [
         check('name', 'the name is required').not().isEmpty(),
