@@ -6,7 +6,7 @@ const key = require('../config/keys');
 const {validationResult} = require('express-validator');
 
 exports.createUser = async (req,res) => {
-    
+    return res.json({msg: `Hello `});
     const {password, email} = req.body;
     //check user validate
     
@@ -30,7 +30,6 @@ exports.createUser = async (req,res) => {
        
         await user.save();
 
-        return res.json({msg: `Hello `});
         // const payload = {
         //     user : {
         //         id: user.id
