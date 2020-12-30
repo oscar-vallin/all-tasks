@@ -4,14 +4,11 @@ const route = express.Router();
 const Data = require('../models/Data');
 
 
-route.post('/', (req,res) => {
+route.post('/', async  (req,res) => {
     
     var data = new Data(req.body);
 
-    data.save(function(err, doc) {
-        if (err) return console.error(err);
-        console.log("Document inserted succussfully!");
-      });
+    await data.save()
 
       res.json(data);
 
