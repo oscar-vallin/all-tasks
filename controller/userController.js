@@ -29,8 +29,8 @@ exports.createUser = async (req,res) => {
     
        
         await user.save();
-        
-        return res.json({msg: `Hello ${req.body}`});
+
+        return res.json({msg: `Hello `});
         // const payload = {
         //     user : {
         //         id: user.id
