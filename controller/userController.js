@@ -15,7 +15,7 @@ exports.createUser = async (req,res) => {
     if(!err.isEmpty()) return res.status(400).json({err: err.array()});
   
     try{
-        return res.json({msg: `Name is ${req.body}`})
+        return res.json(req.body);
         let user;
         // return res.json(password);
         user = await User.findOne({email});
