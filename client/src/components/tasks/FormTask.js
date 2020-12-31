@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {addTaskAction, errorTaskAction} from '../../redux/taskDuck';
+import {addTaskAction, errorTaskAction} from '../../redux/taskReducerDuck';
 
 import './style.css'
 

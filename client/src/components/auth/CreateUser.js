@@ -31,10 +31,10 @@ const CreateUser = ({history}) => {
     const onSubmit = e => {
         e.preventDefault();
 
-        if(name.trim() === '' || email.trim() === '' || password.trim() === '' || confirmPassword.trim() === ''){
-            return alert("All the files ares required");
-        }
-        if(confirmPassword !== password) return alert('The password do not masth');
+        // if(name.trim() === '' || email.trim() === '' || password.trim() === '' || confirmPassword.trim() === ''){
+        //     return alert("All the files ares required");
+        // }
+        // if(confirmPassword !== password) return alert('The password do not masth');
         dispatch(createUserAction(createUser));
     }
 

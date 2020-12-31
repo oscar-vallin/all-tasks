@@ -1,6 +1,6 @@
 
 import {useDispatch} from 'react-redux';
-import {deleteTaskAction, updateTaskAction} from '../../redux/taskDuck';
+import {deleteTaskAction, updateTaskAction} from '../../redux/taskReducerDuck';
 import './style.css';
 
 const Task = ({task}) => {

@@ -16,6 +16,7 @@ const LOG_OUT = "LOG_OUT";
 const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 const LOGIN_ERROR = "LOGIN_ERROR";
 
+
 export default function reducer(state = initialState, action){
     switch(action.type){
         case USER_SUCCESS:
@@ -48,10 +49,10 @@ export const createUserAction = data => async dispatch => {
     
         authenticatedUserActions()(dispatch);
     } catch (error) {
-        console.log("perro")
+        console.log(error.response.data.err)
         dispatch({
             type: USER_ERROR,
-            payload: error.response.data.msg
+            payload: error.response.data.err
         })
     }
     

@@ -3,7 +3,7 @@ import React from 'react';
 import Task from './Task';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {getTaskAction, hideTaskAction} from '../../redux/taskDuck';
+import {getTaskAction, hideTaskAction} from '../../redux/taskReducerDuck';
 const ListTask = () => {
 
     const dispatch = useDispatch();

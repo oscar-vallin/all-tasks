@@ -1,6 +1,6 @@
 .form-user{
-    height: 90vh;
-    min-height: 550px;
+    height: 85vh;
+    min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,6 +40,7 @@
     padding: 1rem;
     flex: 1;
 }
+
 
 .camp-form input[type="submit"]{
     margin-top: 15px;
@@ -89,4 +90,34 @@ input[type="submit"]:hover{
   .account-link:hover{
       font-size: 1.7rem;
       color: black;
+  }
+
+  .password-incorrect{
+      color: red;
+      font-size: 9px;
+      display: flex;
+      float: right;
+      margin-top: -10px;
+      font-weight: 500;
+  }
+
+  .user-incorrect{
+      color: red;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      font-size: 9px;
+      margin-top: -2rem;
+  }
+  @media (min-width:768px){
+      .password-incorrect{
+          font-size: 1.1rem;
+      }
+      .user-incorrect{
+          font-size: 1.1rem;
+      }
+  }
+  i{
+      margin-left: -25px;
+      color: red;
   }
