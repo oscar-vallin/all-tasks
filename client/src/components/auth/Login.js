@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {userLoginAction} from '../../redux/authReducerDuck';
+import {showAlertAuthAction} from '../../redux/handleErrorsReducerDuck'
 
 import './style.css'
 const Auth = ({history}) => {
@@ -10,13 +11,12 @@ const Auth = ({history}) => {
     
     const dispatch = useDispatch();
     const auth = useSelector(data => data.auth);
+    const error = useSelector(data => data.error);
     
     const [dataUser, getDataUser] = useState({email: '',password: ''});
-    const [showError, getShowError] = useState({passwordError: false, userError: false});
 
     const {email, password} = dataUser;
-    const {passwordError, userError} = showError;
-    
+   
     useEffect(() => {
 
         if(auth.authenticated){
@@ -24,14 +24,11 @@ const Auth = ({history}) => {
         };
         
        if(auth.message){
-           if(auth.message[0] === 'u'){
-               getShowError({userError: true});
-           }else{
-               getShowError({passwordError: true});
-           }
+           dispatch(showAlertAuthAction(auth.message));
        };
+
        
-    },[auth.authenticated, history,auth.message]);
+    },[auth.authenticated, history,auth.message,dispatch]);
 
     
 
@@ -52,15 +49,15 @@ const Auth = ({history}) => {
                     <div className="camp-form">
                         <label htmlFor="email">Email</label>
                         <input type="email" id="email" value={email || ''} name="email" placeholder="email" onChange={onChange}/>
-                       { userError ? <i className="material-icons">error</i> : null}
+                       { error.emailError &&  <i className="material-icons">error</i> }
                     </div>
-                    {userError ? <p className="user-incorrect">invalid email</p> : null}
+                    {error.emailError &&  <p className="user-incorrect">invalid email</p> }
                     <div className="camp-form">
                         <label htmlFor="password">Password</label>
                         <input type="password" id="password" value={password || ''} name="password" placeholder="password" onChange={onChange}/>
-                       {passwordError ?  <i className="material-icons prefix">error</i>: null}
+                       {error.passwordError && <i className="material-icons prefix">error</i>}
                     </div>
-                    {passwordError ? <p className="password-incorrect">password incorrect</p> : null}
+                    {error.passwordError  && <p className="password-incorrect">password incorrect</p>}
                     <div className="camp-form">
                         <input type="submit" value="Log In" />
                     </div>

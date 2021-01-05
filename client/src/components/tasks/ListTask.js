@@ -18,7 +18,7 @@ const ListTask = () => {
             <h2>Tasks</h2>
             <button onClick={() => showTasks()} className="btn btn-secundary">Get Tasks</button>
             <button onClick={() => dispatch(hideTaskAction())} className="btn btn-secundary">Hide Tasks</button>
-            <ul>
+            <ul className="show-task">
                 {tasksArray.length === 0 && !getTasks.showTask
                     ? null
                     :

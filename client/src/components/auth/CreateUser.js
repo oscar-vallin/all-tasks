@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import {createUserAction} from '../../redux/authReducerDuck';
+import {showAlertUserAction} from '../../redux/handleErrorsReducerDuck';
 
 import './style.css';
 
@@ -10,6 +11,7 @@ const CreateUser = ({history}) => {
 
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
+    const error = useSelector(state => state.error);
 
 
     const [createUser, setCreateUser] = useState({
@@ -19,38 +21,28 @@ const CreateUser = ({history}) => {
         confirmPassword: '',
     });
 
-    const [handleErrors, showHandleErrors] = useState({
-        confirmPasswordError: false,
-        getPassword: true,
-        validEmail: false,
-    });
+    const [confirmPasswordError, showHandleErrors] = useState(false);
 
     const {name, email, password, confirmPassword} = createUser;
-    const {confirmPasswordError, getPassword, validEmail} = handleErrors;
 
     useEffect(() => {
         if(auth.authenticated){
             history.push('/tasks')
         }
-        auth.message = null;
-        if(typeof auth.message === typeof '') return showHandleErrors({validEmail: true});
-        if(auth.message !== ''){
-            if(password.length > 5){
-                showHandleErrors({getPassword: false});
-            }else{
-                showHandleErrors({getPassword: true});
-            }
+        
+        if(auth.message){
+           dispatch(showAlertUserAction(auth.message));
         }
-    },[history,auth, password])
+    },[history,auth,dispatch,confirmPassword])
 
     const onChange = e => setCreateUser({...createUser,[e.target.name]: e.target.value});
 
     const onSubmit = e => {
         e.preventDefault();
 
-        
-        if(password !== confirmPassword) return showHandleErrors({confirmPasswordError: true});
-        
+        if(password !== confirmPassword){
+            return showHandleErrors({confirmPassword: true});
+        }
         dispatch(createUserAction(createUser));
     }
 
@@ -62,20 +54,21 @@ const CreateUser = ({history}) => {
                     <div className="camp-form">
                         <label htmlFor="user">User Name</label>
                         <input type="text" value={name || ''} name="name" id="user" placeholder="user name" onChange={onChange}/>
-                        {!name ?  <i className="material-icons prefix">error</i>: null}
+                        {error.nameRequired ?  <i className="material-icons prefix">error</i>: null}
                     </div>
+                    {error.nameRequired  && <p className="password-incorrect">the name is required</p>}
                     <div className="camp-form">
                         <label htmlFor="email">Email</label>
                         <input type="email" value={email || ''} name="email" id="email" placeholder="email" onChange={onChange}/>
-                        {validEmail ?  <i className="material-icons prefix">error</i>: null}
+                        {error.emailExist &&   <i className="material-icons prefix">error</i>}
                     </div>
-                    {validEmail ? <p className="password-incorrect">{auth.message}</p> : null}
+                    {error.emailExist && <p className="password-incorrect">{error.emailExist}</p>}
                     <div className="camp-form">
                         <label htmlFor="password">Password</label>
                         <input type="password" value={password || ''} name="password" id="password" placeholder="password" onChange={onChange}/>
-                        {getPassword ?  <i className="material-icons prefix">error</i>: null}
+                        {error.passwordError && <i className="material-icons prefix">error</i>}
                     </div>
-                    {getPassword ? <p className="password-incorrect">password must be at leats 6 characters</p> : null}
+                    {error.passwordError && <p className="password-incorrect">password must be at leats 6 characters</p>}
                     <div className="camp-form">
                         <label htmlFor="confirmPassword">Confirm Password</label>
                         <input type="password" value={confirmPassword || ''} name="confirmPassword" id="confirmPassword" placeholder="confirm password" onChange={onChange}/>

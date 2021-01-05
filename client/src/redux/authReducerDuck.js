@@ -1,11 +1,12 @@
 import axios from 'axios';
 import tokenAuth from '../config/token';
 
+import {showAlertAuthAction,showAlertUserAction} from './handleErrorsReducerDuck';
+
 const initialState = {
     token: localStorage.getItem('token'),
     authenticated: null,
     user: null,
-    message: null,
     fetching: true
 };
 
@@ -24,12 +25,12 @@ export default function reducer(state = initialState, action){
             localStorage.setItem('token', action.payload.token);
             return {...state, fetching: false, authenticated: true, message: null };
         case GET_USER:
-            return {...state, user: action.payload, fetching: false, authenticated: true, message: null}; 
+            return {...state, user: action.payload, fetching: false, authenticated: true}; 
         case USER_ERROR:
         case LOGIN_ERROR:    
         case LOG_OUT:
             localStorage.removeItem('token');
-            return {...state, token: null, fetching: false, authenticated: null, user: null, message: action.payload}     
+            return {...state, token: null, fetching: false, authenticated: null, user: null}     
         default:
             return state;
     };
@@ -49,11 +50,11 @@ export const createUserAction = data => async dispatch => {
     
         authenticatedUserActions()(dispatch);
     } catch (error) {
-     
+        const msg = error.response.data.err;
         dispatch({
             type: USER_ERROR,
-            payload: error.response.data.err
         })
+        showAlertUserAction(msg)(dispatch)
     }
     
 }
@@ -73,15 +74,14 @@ export const authenticatedUserActions = () => async dispatch => {
         })
 
     } catch (error) {
-        console.log(error);
         dispatch({
             type: LOGIN_ERROR
-        })
-    }
+        });
+    };
 }
 
-export const userLoginAction = user => async dispatch => {
-
+export const userLoginAction = user => async( dispatch, getState )=> {
+   
     try {
         
         const response = await axios.post('/api/auth', user);
@@ -93,10 +93,12 @@ export const userLoginAction = user => async dispatch => {
         authenticatedUserActions()(dispatch);
 
     } catch (error) {
+        const msg = error.response.data.msg;
         dispatch({
             type: LOGIN_ERROR,
-            payload: error.response.data.msg
-        })
+        });
+        console.log(getState())
+        showAlertAuthAction(msg)(dispatch);
     }
 }
 
