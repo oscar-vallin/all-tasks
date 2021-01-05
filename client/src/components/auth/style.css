@@ -41,6 +41,10 @@
     flex: 1;
 }
 
+#confirmPassword{
+    margin-top: 15px;
+    
+}
 
 .camp-form input[type="submit"]{
     margin-top: 15px;
@@ -97,7 +101,7 @@ input[type="submit"]:hover{
       font-size: 9px;
       display: flex;
       float: right;
-      margin-top: -10px;
+      margin-top: -12px;
       font-weight: 500;
   }
 
@@ -112,6 +116,7 @@ input[type="submit"]:hover{
   @media (min-width:768px){
       .password-incorrect{
           font-size: 1.1rem;
+          margin-bottom: -15px;
       }
       .user-incorrect{
           font-size: 1.1rem;
@@ -120,4 +125,8 @@ input[type="submit"]:hover{
   i{
       margin-left: -25px;
       color: red;
+  }
+
+  .center{
+      margin-top: 15px;
   }

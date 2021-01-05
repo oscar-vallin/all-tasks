@@ -24,7 +24,7 @@ export default function reducer(state = initialState, action){
             localStorage.setItem('token', action.payload.token);
             return {...state, fetching: false, authenticated: true, message: null };
         case GET_USER:
-            return {...state, user: action.payload, fetching: false, authenticated: true}; 
+            return {...state, user: action.payload, fetching: false, authenticated: true, message: null}; 
         case USER_ERROR:
         case LOGIN_ERROR:    
         case LOG_OUT:
@@ -49,7 +49,7 @@ export const createUserAction = data => async dispatch => {
     
         authenticatedUserActions()(dispatch);
     } catch (error) {
-        console.log(error.response.data.err)
+     
         dispatch({
             type: USER_ERROR,
             payload: error.response.data.err
